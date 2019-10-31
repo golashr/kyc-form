@@ -116,6 +116,7 @@ router.post('/', upload.array('file', 5), (request, response) => {
       for(let i=0; i<request.files.length; i++) {
         details.photos.push(request.files[i].filename)
       }
+      if(!validator.isEmail(details.emailAddress)) return errorResponse(response, 'Invalid Email Address');
       User.create(details)
         .then(console.log)
         .catch(console.log)
