@@ -1,4 +1,7 @@
-mongoose.connect('mongodb://127.0.0.1/kyc', { useNewUrlParser: true });
+const dotenv = require('dotenv').config()
+const mongoose = require('mongoose');
+console.log(process.env.MONGO_HOST)
+mongoose.connect(`mongodb://${process.env.MONGO_HOST}/${process.env.MONGO_DB}`, { useNewUrlParser: true });
   mongoose.connection.on('connected', () => {
   console.log(`[!] Connected to MongoD`);
 });

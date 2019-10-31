@@ -80,12 +80,11 @@ function submitForm(e) {
     <div class="row justify-content-center">
 
         <div class="col-lg-10 col-xl-9">
-            <form class="kyc-form-steps card mx-lg-4" onsubmit="submitForm()">
+            <form action="/" method="post" enctype="multipart/form-data">
+            <div class="kyc-form-steps card mx-lg-4 dropzone">
                 <div class="form-step form-step1">
                     <div class="form-step-head card-innr">
                         <div class="step-head">
-
-
                             <div class="step-number">01</div>
                             <div class="step-head-text">
                                 <h4>Personal Details</h4>
@@ -102,7 +101,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">First Name <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="firstName">
+                                    <input class="input-bordered" type="text" name="firstName">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -110,7 +109,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Last Name <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="lastName">
+                                    <input class="input-bordered" type="text" name="lastName">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -118,7 +117,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Email Address <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="email">
+                                    <input class="input-bordered" type="text" name="emailAddress">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -126,7 +125,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Phone Number <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="phone">
+                                    <input class="input-bordered" type="text" name="phoneNumber">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -134,7 +133,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Date of Birth <span class="text-danger">*</span></label>
-                                    <input class="input-bordered date-picker" type="text" id="dob">
+                                    <input class="input-bordered date-picker" type="text" name="dateOfBirth">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -142,7 +141,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Telegram Username</label>
-                                    <input class="input-bordered" type="text" id="telegram">
+                                    <input class="input-bordered" type="text" name="telegram">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -154,7 +153,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Address Line 1 <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="address1">
+                                    <input class="input-bordered" type="text" name="address1">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -162,7 +161,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Address Line 2</label>
-                                    <input class="input-bordered" type="text" id="address2">
+                                    <input class="input-bordered" type="text" name="address2">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -170,7 +169,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">City <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="city">
+                                    <input class="input-bordered" type="text" name="city">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -178,7 +177,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">State <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="state">
+                                    <input class="input-bordered" type="text" name="state">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -186,7 +185,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label for="nationality" class="input-item-label">Nationality <span class="text-danger">*</span></label>
-                                    <select id="nationality">
+                                    <select name="nationality">
                                     	<option value="AF">Afghanistan</option>
                                     	<option value="AX">Åland Islands</option>
                                     	<option value="AL">Albania</option>
@@ -445,7 +444,7 @@ function submitForm(e) {
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
                                     <label class="input-item-label">Zip Code <span class="text-danger">*</span></label>
-                                    <input class="input-bordered" type="text" id="zip">
+                                    <input class="input-bordered" type="text" name="zipCode">
                                 </div>
                                 <!-- .input-item -->
                             </div>
@@ -466,31 +465,13 @@ function submitForm(e) {
                         </div>
                     </div>
                     <!-- .step-head -->
-                    <div class="form-step-fields card-innr">
+
+                                   <div class="form-step-fields card-innr">
                         <div class="note note-plane note-light-alt note-md pdb-0-5x"><em class="fas fa-info-circle"></em>
                             <p>In order to complete, please upload any of the following personal document.</p>
                         </div>
                         <div class="gaps-2x"></div>
-                        <ul class="nav nav-tabs nav-tabs-bordered row flex-wrap guttar-20px" role="tablist">
-                            <li class="nav-item flex-grow-0">
-                                <a class="nav-link d-flex align-items-center active" data-toggle="tab" href="#passport">
-                                    <span>Passport</span>
-                                </a>
-                            </li>
-                            <li class="nav-item flex-grow-0">
-                                <a class="nav-link d-flex align-items-center" data-toggle="tab" href="#national-card">
-                                    <span>National Card</span>
-                                </a>
-                            </li>
-                            <li class="nav-item flex-grow-0">
-                                <a class="nav-link d-flex align-items-center" data-toggle="tab" href="#driver-licence">
-                                  <span>Driver’s License</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- .nav-tabs-line -->
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="passport">
+
                                 <h5 class="text-secondary font-bold">To avoid delays when verifying account, Please make sure bellow:</h5>
                                 <ul>
                                   <li><i class="fas fa-check"></i> Chosen credential must not be expaired.</li>
@@ -498,88 +479,19 @@ function submitForm(e) {
                                   <li><i class="fas fa-check"></i> Make sure that there is no light glare on the card.</li>
                                 </ul>
                                 <div class="gaps-2x"></div>
-                                <h5 class="font-mid">Upload Here Your Passport Copy</h5>
+                                <h5 class="font-mid">Upload Your Passport or Drivers Licence(Front + Back) Copy</h5>
                                 <div class="row align-items-center">
                                     <div class="col-sm-8">
                                         <div class="upload-box">
-                                            <div class="upload-zone dropzone dz-clickable">
-                                                <div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span>
-                                                    <button class="btn btn-primary">SELECT</button>
-                                                </div>
-                                            </div>
+                                                <input name="file" type="file" multiple />
+
                                         </div>
                                     </div>
                                     <div class="col-sm-4 d-none d-sm-block">
                                     </div>
                                 </div>
                             </div>
-                            <!-- .tab-pane -->
-                            <div class="tab-pane fade" id="national-card">
-                                <h5 class="text-secondary font-bold">To avoid delays when verifying account, Please make sure bellow:</h5>
-                                <ul>
-                                  <li><i class="fas fa-check"></i> Chosen credential must not be expaired.</li>
-                                  <li><i class="fas fa-check"></i> Document should be good condition and clearly visible.</li>
-                                  <li><i class="fas fa-check"></i> Make sure that there is no light glare on the card.</li>
-                                </ul>
-                                <div class="gaps-2x"></div>
-                                <h5 class="font-mid">Upload Here Your National id Front Side</h5>
-                                <div class="row align-items-center">
-                                    <div class="col-sm-8">
-                                        <div class="upload-box">
-                                            <div class="upload-zone dropzone dz-clickable">
-                                                <div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span>
-                                                    <button class="btn btn-primary">SELECT</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 d-none d-sm-block">
-                                    </div>
-                                </div>
-                                <div class="gaps-3x"></div>
-                                <h5 class="font-mid">Upload Here Your National id Back Side</h5>
-                                <div class="row align-items-center">
-                                    <div class="col-sm-8">
-                                        <div class="upload-box">
-                                            <div class="upload-zone dropzone dz-clickable">
-                                                <div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span>
-                                                    <button class="btn btn-primary">SELECT</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 d-none d-sm-block">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .tab-pane -->
-                            <div class="tab-pane fade" id="driver-licence">
-                                <h5 class="text-secondary font-bold">To avoid delays when verifying account, Please make sure bellow:</h5>
-                                <ul>
-                                    <li><i class="fas fa-check"></i> Chosen credential must not be expaired.</li>
-                                    <li><i class="fas fa-check"></i> Document should be good condition and clearly visible.</li>
-                                    <li><i class="fas fa-check"></i> Make sure that there is no light glare on the card.</li>
-                                </ul>
-                                <div class="gaps-2x"></div>
-                                <h5 class="font-mid">Upload Here Your Driving Licence Copy</h5>
-                                <div class="row align-items-center">
-                                    <div class="col-sm-8">
-                                        <div class="upload-box">
-                                            <div class="upload-zone dropzone dz-clickable">
-                                                <div class="dz-message" data-dz-message=""><span class="dz-message-text">Drag and drop file</span><span class="dz-message-or">or</span>
-                                                    <button class="btn btn-primary">SELECT</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 d-none d-sm-block">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .tab-pane -->
-                        </div>
-                        <!-- .tab-content -->
-                    </div>
+
                     <!-- .step-fields -->
                 </div>
                 <div class="form-step form-step3">
@@ -598,7 +510,7 @@ function submitForm(e) {
                           <div class="col-md-6">
                               <div class="input-item input-with-label">
                                   <label class="input-item-label">Payment Method <span class="text-danger">*</span></label>
-                                  <input class="input-bordered date-picker" type="text" placeholder="USD, AUD, BTC, ETH or BNB" id="payment">
+                                  <input class="input-bordered date-picker" type="text" placeholder="USD, AUD, BTC, ETH or BNB" name="paymentMethod">
                               </div>
                               <!-- .input-item -->
                           </div>
@@ -612,14 +524,14 @@ function submitForm(e) {
                     <div class="form-step-fields card-innr">
 
                         <div class="input-item">
-                            <input class="" type="checkbox" id="agree">
-                            <label for="info-currect">All the personal information I have entered is correct.</label>
+                            <label for="info-currect">By submitting this form, you agree that all the personal information you have provided is correct.</label>
                         </div>
                         <div class="gaps-1x"></div><button class="btn btn-primary">Process for Verify</button></div>
                     <!-- .step-fields -->
                 </div>
             </div>
             <!-- .card -->
+          </div>
         </form>
     </div>
 </div>

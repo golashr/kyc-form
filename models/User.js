@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -15,7 +14,7 @@ state: String,
 nationality: String,
 zipCode: String,
 paymentMethod: String,
-agree: Boolean
+photos: Array,
 });
 
 userSchema.set('timestamps', true)
