@@ -95,8 +95,16 @@ const errorResponse = (response, message, data = null, status = 403) => {
   });
 };
 
+const renderError = (response, errors) => {
+  response.render('home', {errors: errors})
+};
+
+const renderSuccess = (response) => {
+  response.render('success')
+}
+
 router.get('/', (request, response) => {
-  response.render('home')
+  response.render('home', {errors: []})
 })
 
 // router.get('/db', (request, response) => {
@@ -107,20 +115,21 @@ router.get('/', (request, response) => {
 //     .catch(console.log)
 // })
 
-router.post('/', upload.array('file', 5), (request, response) => {
+router.post('/', upload.array('file', 6), (request, response) => {
   const details = request.body
   checkRequired(details)
     .then(errors => {
-      if(errors.length > 0) return errorResponse(response, 'Missing field(s)', errors)
+      if(errors.length > 0) return renderError(response, errors);
       details.photos = []
       for(let i=0; i<request.files.length; i++) {
         details.photos.push(request.files[i].filename)
       }
-      if(!validator.isEmail(details.emailAddress)) return errorResponse(response, 'Invalid Email Address');
+      if(!validator.isEmail(details.emailAddress)) return renderError(response, ['Invalid Email Address']);
+      if(details.photos.length === 0) return renderError(response, ['Must upload a photo']);
       User.create(details)
         .then(console.log)
         .catch(console.log)
-      return successResponse(response, 'Successful signup')
+      return renderSuccess(response)
     })
     .catch(error => {
       console.log(error.message || error)
