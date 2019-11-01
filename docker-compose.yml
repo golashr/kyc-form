@@ -1,0 +1,13 @@
+version: '3'
+services:
+  redis:
+    image: 'ledgeriumengineering/ledgeriumkyc:v1.0'
+    ports:
+      - '5002:5002'
+    networks:
+      test_net:
+        ipv4_address: 172.19.240.77
+volumes: {}
+networks:
+  test_net:
+    external: true
