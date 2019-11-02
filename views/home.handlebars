@@ -69,6 +69,28 @@
       })
   }
 </script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#kycform").submit(function (event) {
+      console.log("sbubmit..........")
+      event.preventDefault();
+      var i;
+      let valided = true;
+      for (i = 0; i < requiredFields.length; i++) {
+        const fieldName = requiredFields[i];
+        var fieldElement = $("input[name=" + fieldName + "]");
+        if (!fieldElement.val()) {
+          valided = false;
+          fieldElement.addClass("input-invalid");
+        } else {
+          fieldElement.removeClass("input-invalid");
+        }
+      }
+      return valided;
+
+    });
+  });
+</script>
 <style>
   header {
     height: 50px;
@@ -86,6 +108,19 @@
     padding: 24px 0;
     font-weight: bold;
   }
+
+  .blue {
+    color: #203060 !important;
+  }
+
+  .btn--blue {
+    background: #203060 !important;
+    border-color: #203060 !important;
+  }
+
+  .input-invalid {
+    border: 1px solid red !important;
+  }
 </style>
 <header>
   <img class="header-logo" src="https://ledgerium.netlify.com/img/logo-white.svg" alt="logo">
@@ -94,7 +129,7 @@
 
   <br>
   <div class="row justify-content-center">
-    <h2 class="header-title"> Ledgerium Token Sale KYC/AML </h2>
+    <h2 class="header-title blue"> Ledgerium Token Sale KYC/AML </h2>
 
   </div>
   <div class="row justify-content-center">
@@ -110,14 +145,14 @@
   <div class="row justify-content-center">
 
     <div class="col-lg-10 col-xl-9">
-      <form action="/kyc/" method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" id="kycform">
         <div class="kyc-form-steps card mx-lg-4 dropzone">
           <div class="form-step form-step1">
             <div class="form-step-head card-innr">
               <div class="step-head">
                 <div class="step-number">01</div>
                 <div class="step-head-text">
-                  <h4>Personal Details</h4>
+                  <h4 class="blue">Personal Details</h4>
                   <p>Your simple personal information required for identification</p>
                 </div>
               </div>
@@ -179,7 +214,7 @@
                 <!-- .col -->
               </div>
               <!-- .row -->
-              <h4 class="text-secondary mgt-0-5x">Your Address</h4>
+              <h4 class="text-secondary mgt-0-5x blue">Your Address</h4>
               <div class="row">
                 <div class="col-md-6">
                   <div class="input-item input-with-label">
@@ -491,7 +526,7 @@
               <div class="step-head">
                 <div class="step-number">02</div>
                 <div class="step-head-text">
-                  <h4>Document Upload</h4>
+                  <h4 class="blue">Document Upload</h4>
                   <p>To verify your identity, please upload any of your document</p>
                 </div>
               </div>
@@ -504,14 +539,15 @@
               </div>
               <div class="gaps-2x"></div>
 
-              <h5 class="text-secondary font-bold">To avoid delays when verifying account, Please make sure bellow:</h5>
+              <h5 class="font-bold blue">To avoid delays when verifying account, Please make sure bellow:
+              </h5>
               <ul>
                 <li><i class="fas fa-check"></i> Chosen credential must not be expaired.</li>
                 <li><i class="fas fa-check"></i> Document should be good condition and clearly visible.</li>
                 <li><i class="fas fa-check"></i> Make sure that there is no light glare on the card.</li>
               </ul>
               <div class="gaps-2x"></div>
-              <h5 class="font-mid">Upload Your Passport or Drivers Licence(Front + Back) Copy <span
+              <h5 class="font-mid blue">Upload Your Passport or Drivers Licence(Front + Back) Copy <span
                   class="text-danger">*</span></h5>
               <div class="row align-items-center">
                 <div class="col-sm-8">
@@ -532,7 +568,7 @@
               <div class="step-head">
                 <div class="step-number">03</div>
                 <div class="step-head-text">
-                  <h4>Your Payment Method</h4>
+                  <h4 class="blue">Your Payment Method</h4>
                   <p>Indicate the method you will use to contribute to the sale</p>
                 </div>
               </div>
@@ -561,7 +597,7 @@
                   <label for="info-currect">By submitting this form, you agree that all the personal information you
                     have provided is correct.</label>
                 </div>
-                <div class="gaps-1x"></div><button class="btn btn-primary">Process for Verify</button>
+                <div class="gaps-1x"></div><button class="btn btn-primary btn--blue ">Process for Verify</button>
               </div>
               <!-- .step-fields -->
             </div>
