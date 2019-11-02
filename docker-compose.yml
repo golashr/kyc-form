@@ -1,9 +1,27 @@
 version: '3'
 services:
-  redis:
+  ledgeriumkyc:
     image: 'ledgeriumengineering/ledgeriumkyc:v1.0'
+    environment:
+      - SERVER_PORT=5002
+      - MONGO_HOST=172.19.240.2
+      - MONGO_DB=kyc
     ports:
       - '5002:5002'
+    restart: always
+    entrypoint:
+      - /bin/sh
+      - '-c'
+      - >
+        set -u
+
+        set -e
+
+        mkdir -p /ledgeriumkyclogs
+
+        DATE=`date '+%Y-%m-%d_%H-%M-%S'`
+
+        node index.js
     networks:
       test_net:
         ipv4_address: 172.19.240.77
