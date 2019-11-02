@@ -70,6 +70,10 @@
   }
 </script>
 <script type="text/javascript">
+
+  function getInputVal(inputName) {
+    return $("input[name=" + inputName + "]").val();
+  }
   $(document).ready(function () {
     $("#kycform").submit(function (event) {
       console.log("sbubmit..........")
@@ -78,15 +82,48 @@
       let valided = true;
       for (i = 0; i < requiredFields.length; i++) {
         const fieldName = requiredFields[i];
-        var fieldElement = $("input[name=" + fieldName + "]");
-        if (!fieldElement.val()) {
-          valided = false;
-          fieldElement.addClass("input-invalid");
+        if (fieldName !== "nationality") {
+          var fieldElement = $("input[name=" + fieldName + "]");
+          if (!fieldElement.val()) {
+            valided = false;
+            console.log("invalided fieldName ", fieldName)
+            fieldElement.addClass("input-invalid");
+          } else {
+            fieldElement.removeClass("input-invalid");
+          }
         } else {
-          fieldElement.removeClass("input-invalid");
+          var fieldElement = $("select[name=" + fieldName + "]");
+          if (!fieldElement.val()) {
+            valided = false;
+            console.log("invalided fieldName ", fieldName)
+            fieldElement.addClass("input-invalid");
+          } else {
+            fieldElement.removeClass("input-invalid");
+          }
         }
+
       }
-      return valided;
+      if (valided) {
+        const formData = {
+          firstName: getInputVal("firstName"),
+          lastName: getInputVal("lastName"),
+          emailAddress: getInputVal("emailAddress"),
+          phoneNumber: getInputVal("phoneNumber"),
+          dateOfBirth: getInputVal("dateOfBirth"),
+          telegram: getInputVal("telegram"),
+          address1: getInputVal("address1"),
+          address2: getInputVal("address2"),
+          city: getInputVal("city"),
+          state: getInputVal("state"),
+          nationality: $("select[name=nationality]").val(),
+          zipCode: getInputVal("zipCode"),
+          paymentMethod: getInputVal("paymentMethod"),
+          agree: getInputVal("agree"),
+        }
+        console.log("formdata ..", formData)
+
+        //todo post data
+      }
 
     });
   });
@@ -121,6 +158,14 @@
   .input-invalid {
     border: 1px solid red !important;
   }
+
+  .fw500 {
+    font-weight: 500 !important;
+  }
+
+  .fw600 {
+    font-weight: 600 !important;
+  }
 </style>
 <header>
   <img class="header-logo" src="https://ledgerium.netlify.com/img/logo-white.svg" alt="logo">
@@ -129,7 +174,7 @@
 
   <br>
   <div class="row justify-content-center">
-    <h2 class="header-title blue"> Ledgerium Token Sale KYC/AML </h2>
+    <h2 class="header-title blue fw600"> Ledgerium Token Sale KYC/AML </h2>
 
   </div>
   <div class="row justify-content-center">
@@ -145,14 +190,14 @@
   <div class="row justify-content-center">
 
     <div class="col-lg-10 col-xl-9">
-      <form method="post" enctype="multipart/form-data" id="kycform">
+      <form method="post" action="/kyc/" enctype="multipart/form-data" id="kycform">
         <div class="kyc-form-steps card mx-lg-4 dropzone">
           <div class="form-step form-step1">
             <div class="form-step-head card-innr">
               <div class="step-head">
                 <div class="step-number">01</div>
                 <div class="step-head-text">
-                  <h4 class="blue">Personal Details</h4>
+                  <h4 class="blue fw500">Personal Details</h4>
                   <p>Your simple personal information required for identification</p>
                 </div>
               </div>
@@ -214,7 +259,7 @@
                 <!-- .col -->
               </div>
               <!-- .row -->
-              <h4 class="text-secondary mgt-0-5x blue">Your Address</h4>
+              <h4 class=" mgt-0-5x blue fw500">Your Address</h4>
               <div class="row">
                 <div class="col-md-6">
                   <div class="input-item input-with-label">
@@ -253,6 +298,7 @@
                     <label for="nationality" class="input-item-label">Nationality <span
                         class="text-danger">*</span></label>
                     <select name="nationality">
+                      <option value="">please select nationality</option>
                       <option value="AF">Afghanistan</option>
                       <option value="AX">Åland Islands</option>
                       <option value="AL">Albania</option>
@@ -526,7 +572,7 @@
               <div class="step-head">
                 <div class="step-number">02</div>
                 <div class="step-head-text">
-                  <h4 class="blue">Document Upload</h4>
+                  <h4 class="blue fw500">Document Upload</h4>
                   <p>To verify your identity, please upload any of your document</p>
                 </div>
               </div>
@@ -547,7 +593,7 @@
                 <li><i class="fas fa-check"></i> Make sure that there is no light glare on the card.</li>
               </ul>
               <div class="gaps-2x"></div>
-              <h5 class="font-mid blue">Upload Your Passport or Drivers Licence(Front + Back) Copy <span
+              <h5 class="font-mid blue fw500">Upload Your Passport or Drivers Licence(Front + Back) Copy <span
                   class="text-danger">*</span></h5>
               <div class="row align-items-center">
                 <div class="col-sm-8">
@@ -568,7 +614,7 @@
               <div class="step-head">
                 <div class="step-number">03</div>
                 <div class="step-head-text">
-                  <h4 class="blue">Your Payment Method</h4>
+                  <h4 class="blue fw500">Your Payment Method</h4>
                   <p>Indicate the method you will use to contribute to the sale</p>
                 </div>
               </div>
@@ -593,11 +639,12 @@
             <div class="form-step form-step-final">
               <div class="form-step-fields card-innr">
 
-                <div class="input-item">
+                <div class="input-item" style="padding-bottom:16px;">
                   <label for="info-currect">By submitting this form, you agree that all the personal information you
                     have provided is correct.</label>
                 </div>
-                <div class="gaps-1x"></div><button class="btn btn-primary btn--blue ">Process for Verify</button>
+                <button class="btn btn-primary btn--blue ">Process for Verify</button>
+                <div class="gaps-1x"></div>
               </div>
               <!-- .step-fields -->
             </div>
