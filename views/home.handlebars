@@ -76,7 +76,6 @@
   }
   $(document).ready(function () {
     $("#kycform").submit(function (event) {
-      console.log("sbubmit..........")
       event.preventDefault();
       var i;
       let valided = true;
@@ -86,7 +85,6 @@
           var fieldElement = $("input[name=" + fieldName + "]");
           if (!fieldElement.val()) {
             valided = false;
-            console.log("invalided fieldName ", fieldName)
             fieldElement.addClass("input-invalid");
           } else {
             fieldElement.removeClass("input-invalid");
@@ -95,7 +93,6 @@
           var fieldElement = $("select[name=" + fieldName + "]");
           if (!fieldElement.val()) {
             valided = false;
-            console.log("invalided fieldName ", fieldName)
             fieldElement.addClass("input-invalid");
           } else {
             fieldElement.removeClass("input-invalid");
@@ -129,43 +126,7 @@
   });
 </script>
 <style>
-  header {
-    height: 50px;
-    background: #203060;
-  }
 
-  .header-logo {
-    padding: 12px 0px;
-    margin: 0 auto;
-    width: 52px;
-    display: block;
-  }
-
-  .header-title {
-    padding: 24px 0;
-    font-weight: bold;
-  }
-
-  .blue {
-    color: #203060 !important;
-  }
-
-  .btn--blue {
-    background: #203060 !important;
-    border-color: #203060 !important;
-  }
-
-  .input-invalid {
-    border: 1px solid red !important;
-  }
-
-  .fw500 {
-    font-weight: 500 !important;
-  }
-
-  .fw600 {
-    font-weight: 600 !important;
-  }
 </style>
 <header>
   <img class="header-logo" src="https://ledgerium.netlify.com/img/logo-white.svg" alt="logo">
