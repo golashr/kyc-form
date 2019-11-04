@@ -74,54 +74,34 @@
   function getInputVal(inputName) {
     return $("input[name=" + inputName + "]").val();
   }
+
   $(document).ready(function () {
-    $("#kycform").submit(function (event) {
-      event.preventDefault();
-      var i;
-      let valided = true;
-      for (i = 0; i < requiredFields.length; i++) {
-        const fieldName = requiredFields[i];
-        if (fieldName !== "nationality") {
-          var fieldElement = $("input[name=" + fieldName + "]");
-          if (!fieldElement.val()) {
-            valided = false;
-            fieldElement.addClass("input-invalid");
+    $('#submit-btn').click(function () {
+      $("#kycform").submit(function (event) {
+        var i;
+        let valided = true;
+        for (i = 0; i < requiredFields.length; i++) {
+          const fieldName = requiredFields[i];
+          if (fieldName !== "nationality") {
+            var fieldElement = $("input[name=" + fieldName + "]");
+            if (!fieldElement.val()) {
+              valided = false;
+              fieldElement.addClass("input-invalid");
+            } else {
+              fieldElement.removeClass("input-invalid");
+            }
           } else {
-            fieldElement.removeClass("input-invalid");
-          }
-        } else {
-          var fieldElement = $("select[name=" + fieldName + "]");
-          if (!fieldElement.val()) {
-            valided = false;
-            fieldElement.addClass("input-invalid");
-          } else {
-            fieldElement.removeClass("input-invalid");
+            var fieldElement = $("select[name=" + fieldName + "]");
+            if (!fieldElement.val()) {
+              valided = false;
+              fieldElement.addClass("input-invalid");
+            } else {
+              fieldElement.removeClass("input-invalid");
+            }
           }
         }
-
-      }
-      if (valided) {
-        const formData = {
-          firstName: getInputVal("firstName"),
-          lastName: getInputVal("lastName"),
-          emailAddress: getInputVal("emailAddress"),
-          phoneNumber: getInputVal("phoneNumber"),
-          dateOfBirth: getInputVal("dateOfBirth"),
-          telegram: getInputVal("telegram"),
-          address1: getInputVal("address1"),
-          address2: getInputVal("address2"),
-          city: getInputVal("city"),
-          state: getInputVal("state"),
-          nationality: $("select[name=nationality]").val(),
-          zipCode: getInputVal("zipCode"),
-          paymentMethod: getInputVal("paymentMethod"),
-          agree: getInputVal("agree"),
-        }
-        console.log("formdata ..", formData)
-
-        //todo post data
-      }
-
+        return valided;
+      });
     });
   });
 </script>
@@ -129,7 +109,8 @@
 
 </style>
 <header>
-  <a href='https://tokensale.ledgerium.io'><img class="header-logo" src="https://ledgerium.netlify.com/img/logo-white.svg" alt="logo"></a>
+  <a href='https://tokensale.ledgerium.io'><img class="header-logo"
+      src="https://ledgerium.netlify.com/img/logo-white.svg" alt="logo"></a>
 </header>
 <div class="container">
 
@@ -604,7 +585,7 @@
                   <label for="info-currect">By submitting this form, you agree that all the personal information you
                     have provided is correct.</label>
                 </div>
-                <button class="btn btn-primary btn--blue ">Process for Verify</button>
+                <button class="btn btn-primary btn--blue" id="submit-btn">Process for Verify</button>
                 <div class="gaps-1x"></div>
               </div>
               <!-- .step-fields -->
