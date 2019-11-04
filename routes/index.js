@@ -107,7 +107,7 @@ router.get('/', (request, response) => {
   response.render('home', {errors: []})
 })
 
-router.post('/kyc', upload.array('file', 6), (request, response) => {
+router.post('/', upload.array('file', 6), (request, response) => {
   const details = request.body
   checkRequired(details)
     .then(errors => {
