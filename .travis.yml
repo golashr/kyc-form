@@ -9,13 +9,12 @@ services:
 before_install:
   - echo "Testing Docker Hub credentials"
   - BUILDID="build-$RANDOM"
-  - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+  - docker login -u=golra03 -p=abcd_1234
   - echo "Docker Hub credentials are working"
  
 script:
   - docker ps -a
 
 after_success:
-  - docker build . -t $DOCKER_USERNAME/ledgeriumkyc:v$BUILDID
-  - docker push $DOCKER_USERNAME/ledgeriumkyc:v$BUILDID
-
+  - docker build . -t golra03/ledgeriumkyc:v$BUILDID
+  - docker push golra03/ledgeriumkyc:v$BUILDID
