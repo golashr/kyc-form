@@ -107,15 +107,7 @@ router.get('/', (request, response) => {
   response.render('home', {errors: []})
 })
 
-// router.get('/db', (request, response) => {
-//   User.find({})
-//     .then(users => {
-//       return successResponse(response, 'Get KYC users', users)
-//     })
-//     .catch(console.log)
-// })
-
-const checkRequiredFields = (request, response, next) => {
+router.post('/kyc', upload.array('file', 6), (request, response) => {
   const details = request.body
   checkRequired(details)
     .then(errors => {
@@ -126,25 +118,16 @@ const checkRequiredFields = (request, response, next) => {
       }
       if(!validator.isEmail(details.emailAddress)) return renderError(response, ['Invalid Email Address']);
       if(details.photos.length === 0) return renderError(response, ['Must upload a photo']);
+      User.create(details)
+        .then(console.log)
+        .catch(console.log)
+      return renderSuccess(response)
       request.details = details
       next()
     })
     .catch(error => {
       console.log(error.message || error)
       response.status(403).send(error.message)
-    })
-
-};
-
-router.post('/', checkRequiredFields, upload.array('file', 6), (request, response) => {
-  const details = request.details
-  User.create(details)
-    .then(user => {
-      return renderSuccess(response)
-    })
-    .catch(error => {
-      console.log(error.message || error)
-      return renderError(response, ['Something went wrong, please try again']);
     })
 })
 
