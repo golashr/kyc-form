@@ -27,8 +27,9 @@ deploy:
   skip_cleanup: true
   provider: script
   script: 
-  - echo "Deploying containers"
-  - ssh ledgerappuser@104.210.106.138 "cd ~/ledgerium/ledgeriumkyc && cp docker-compose.yml docker-compose.yml_v$BUILDID && docker images && sed -i /"s//ledgeriumkyc:v1.0//ledgeriumkyc:v${BUILDID}//g/" && docker-compose up -d"
+    - scp ./deploy_script.sh ledgerappuser@104.210.106.138:~/ledgerium/ledgeriumkyc
+    - ssh ledgerappuser@104.210.106.138 
+    - chmod +x ./deploy_script.sh && sh ./deploy_script.sh
   on:
     branch: master
 env:
