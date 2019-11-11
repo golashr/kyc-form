@@ -25,10 +25,10 @@ before_deploy:
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
 deploy:
-- provider: script
-- script: 
-- echo $PWD
-- cd $PWD 
+  provider: script
+  script: bash ./deploy_script.sh
+  on:
+    branch: master
 env:
   global:
   - secure: 0QFvA76+JrDJ6DLIAVCTTiBFgbR37jbE22/HFE7w9axo8OZIqm4BQqysL08ZttuJjqot4yFtQD3CKRKH6vegiYHH78lWVHUiyvQKyR1CistIqGiyOHrdDFAr9tnD5NHl2Veu0PGKNPE6+D1TIFYF6rod6VVHZSJvXshAC/YBJ1yN4lavwHnaiXk5vcSl6LgOd4nQ4IqTxMhcpdi0nc2KMPu1DM6pT3L936bwrC0lVwsukgpnhuls8NRVPLVQNOXZlT/ka3xzE94Vt1tLQZMEVqbx4y5TXiBygPINNuUXKyqNX5Z1IImaZmO9e54hWqSu4nrPCNDTimO5rWCtEtInSjWZPyXoBg0dvuXy5oPiS26b7ZjN8dTFeyVCnq0piSgqEaIO/sI5uZ2LWfeRDNOWdy3p+2rQ1gMT1gotVgbOSUnQp1WZfKZpPhql4VJk00vALrss8OjOpGVb/d3YpWhhVWMrB47MCORv5ygZ6WRiVV2TNV/pABN1UpFQT5V/F0w2xXocXOuA4bcmlAqQHFGVFvxF5zbZn/K9EAkqiFwgT+JBjyNiz6Kjg4bGoBqNvdKnL+KIXnEEi8IIQNslN8fWovuxbr4JExkwrx5GoOGtTb3ASqWHNGn4PZNyDTaJElMVTsSoJxMA1vEIu5vClEfOciMAHWMaf3OOrLIYJfDWJeM=
