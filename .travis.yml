@@ -33,7 +33,7 @@ deploy:
   provider: script
   skip_cleanup: true
   #script: sh ./deploy_script.sh $BUILDID
-  script: ssh -i ./deploy_key ledgerappuser@104.210.106.138 "sh ./deploy.script.sh $BUILDID $DOCUSENAME"
+  script: ssh -i ./deploy_key ledgerappuser@104.210.106.138 "sh ./deploy_script.sh $BUILDID $DOCUSENAME"
   on:
     branch: master
 env:
