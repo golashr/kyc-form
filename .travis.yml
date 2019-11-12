@@ -17,21 +17,6 @@ script:
 after_success:
 - docker build . -t $DOCUSENAME/ledgeriumkyc:v$BUILDID
 - docker push $DOCUSENAME/ledgeriumkyc:v$BUILDID
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_912f6b4f611e_key -iv $encrypted_912f6b4f611e_iv
-  -in deploy_key.enc -out ./deploy_key -d
-- eval "$(ssh-agent -s)"
-- chmod 600 ./deploy_key
-- echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-- ssh-add ./deploy_key
-# test ssh connection for: https://github.com/dwyl/learn-travis/issues/42
-#- ssh -i ./deploy_key ledgerappuser@104.210.106.138 "pwd && cd ~/ledgerium/ledgeriumkyc && docker-compose down && docker pull $DOCUSENAME/ledgeriumkyc:vbuild-29996 && docker-compose up -d"
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: rsync -r --delete-after --quiet ./deploy_script.sh ledgerappuser@104.210.106.138:~/ledgerium/ledgeriumkyc
-  on:
-    branch: master
 env:
   global:
   - secure: 0QFvA76+JrDJ6DLIAVCTTiBFgbR37jbE22/HFE7w9axo8OZIqm4BQqysL08ZttuJjqot4yFtQD3CKRKH6vegiYHH78lWVHUiyvQKyR1CistIqGiyOHrdDFAr9tnD5NHl2Veu0PGKNPE6+D1TIFYF6rod6VVHZSJvXshAC/YBJ1yN4lavwHnaiXk5vcSl6LgOd4nQ4IqTxMhcpdi0nc2KMPu1DM6pT3L936bwrC0lVwsukgpnhuls8NRVPLVQNOXZlT/ka3xzE94Vt1tLQZMEVqbx4y5TXiBygPINNuUXKyqNX5Z1IImaZmO9e54hWqSu4nrPCNDTimO5rWCtEtInSjWZPyXoBg0dvuXy5oPiS26b7ZjN8dTFeyVCnq0piSgqEaIO/sI5uZ2LWfeRDNOWdy3p+2rQ1gMT1gotVgbOSUnQp1WZfKZpPhql4VJk00vALrss8OjOpGVb/d3YpWhhVWMrB47MCORv5ygZ6WRiVV2TNV/pABN1UpFQT5V/F0w2xXocXOuA4bcmlAqQHFGVFvxF5zbZn/K9EAkqiFwgT+JBjyNiz6Kjg4bGoBqNvdKnL+KIXnEEi8IIQNslN8fWovuxbr4JExkwrx5GoOGtTb3ASqWHNGn4PZNyDTaJElMVTsSoJxMA1vEIu5vClEfOciMAHWMaf3OOrLIYJfDWJeM=
