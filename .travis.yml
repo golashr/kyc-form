@@ -8,6 +8,7 @@ before_install:
 - npm install
 - echo "Testing Docker Hub credentials"
 - BUILDID="build-$RANDOM"
+- echo $BUILDID
 - docker login -u=$DOCUSENAME -p=$DOCPASSWRD
 - echo "Docker Hub credentials are working"
 script:
@@ -15,6 +16,8 @@ script:
 after_success:
 - docker build . -t $DOCUSENAME/ledgeriumkyc:v$BUILDID
 - docker push $DOCUSENAME/ledgeriumkyc:v$BUILDID
+before_deploy:
+- echo "Pushing image"
 deploy:
   skip_cleanup: true
   provider: script
