@@ -11,7 +11,8 @@ before_install:
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
 # test ssh connection for: https://github.com/dwyl/learn-travis/issues/42
-- ssh -i ./deploy_key ledgerappuser@104.210.106.138 "pwd && cd ~/ledgerium/ledgeriumkyc && ls -latr"
-after_success:
+- ssh -i ./deploy_key ledgerappuser@104.210.106.138 "pwd && cd ~/ledgerium/ledgeriumkyc && docker-compose down && docker pull $DOCUSENAME/ledgeriumkyc:v2.1 && docker-compose up -d"
+script:
+- docker ps -a
 - echo "npm install gulp"
 - npm install -g gulp-cli 
