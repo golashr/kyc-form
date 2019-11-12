@@ -4,6 +4,8 @@ node_js:
 - node
 env:
   - SERVER_IP_ADDRESS=104.210.106.138
+services:
+- docker
 before_install:
 - echo "Testing Docker Hub credentials"
 - BUILDID="build-$RANDOM"
