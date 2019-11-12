@@ -20,6 +20,7 @@ before_deploy:
 - echo "Pushing image"
 deploy:
   - provider: script
+    skip-cleanup: true
     script: echo 'Hello'
     on:
       branch: master
