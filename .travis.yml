@@ -27,7 +27,7 @@ deploy:
   skip_cleanup: true
   provider: script
   script: 
-    - scp ./deploy_script.sh ledgerappuser@104.210.106.138:~/ledgerium/ledgeriumkyc
+    - echo "pushing the new image on remote host"
     - ssh ledgerappuser@104.210.106.138 "cd ~/ledgerium/ledgeriumkyc && docker-compose down && docker pull $DOCUSENAME/ledgeriumkyc:v2.1 && docker-compose up -d"
   on:
     branch: master
