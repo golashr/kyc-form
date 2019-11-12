@@ -7,11 +7,18 @@ env:
 services:
 - docker
 before_install:
+- npm install
 - echo "Testing Docker Hub credentials"
 - BUILDID="build-$RANDOM"
 - echo $BUILDID
 - docker login -u=$DOCUSENAME -p=$DOCPASSWRD
 - echo "Docker Hub credentials are working"
+script:
+- docker ps -a
+after_success:
+- docker build . -t $DOCUSENAME/ledgeriumkyc:v$BUILDID
+- docker push $DOCUSENAME/ledgeriumkyc:v$BUILDID
+before_deploy:
 - openssl aes-256-cbc -K $encrypted_912f6b4f611e_key -iv $encrypted_912f6b4f611e_iv
   -in deploy_key.enc -out ./deploy_key -d
 - eval "$(ssh-agent -s)"
