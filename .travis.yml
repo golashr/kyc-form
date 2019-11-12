@@ -12,7 +12,9 @@ before_install:
 - echo $BUILDID
 - docker login -u=$DOCUSENAME -p=$DOCPASSWRD
 - echo "Docker Hub credentials are working"
-install: skip
+script:
+- docker ps -a
+after_success:
 - docker build . -t $DOCUSENAME/ledgeriumkyc:v$BUILDID
 - docker push $DOCUSENAME/ledgeriumkyc:v$BUILDID
 before_deploy:
@@ -23,12 +25,11 @@ before_deploy:
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
 # test ssh connection for: https://github.com/dwyl/learn-travis/issues/42
-- ssh -i ./deploy_key ledgerappuser@104.210.106.138 "pwd && cd ~/ledgerium/ledgeriumkyc && docker-compose down && docker pull $DOCUSENAME/ledgeriumkyc:vbuild-29996 && docker-compose up -d"
+#- ssh -i ./deploy_key ledgerappuser@104.210.106.138 "pwd && cd ~/ledgerium/ledgeriumkyc && docker-compose down && docker pull $DOCUSENAME/ledgeriumkyc:vbuild-29996 && docker-compose up -d"
 deploy:
-  skip_cleanup: true
   provider: script
-  script:
-    - docker ps -a
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet ./deploy_script.sh ledgerappuser@104.210.106.138:~/ledgerium/ledgeriumkyc
   on:
     branch: master
 env:
