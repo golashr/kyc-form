@@ -13,4 +13,4 @@ before_install:
 # test ssh connection for: https://github.com/dwyl/learn-travis/issues/42
 - ssh -i ./deploy_key ledgerappuser@$SERVER_IP_ADDRESS pwd
 after_success:
-  echo "ls -latr"
+- echo "ls -latr"
