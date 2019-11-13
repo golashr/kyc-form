@@ -28,13 +28,11 @@ before_deploy:
 - chmod 600 ./deploy_key
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
-#- rsync -r --delete-after --quiet ./deploy_script.sh $USER@$SERVER_IP_ADDRESS:~/ledgerium/ledgeriumkyc
 - rsync -r --delete-after --quiet ./deploy_script.sh ledgerappuser@104.210.106.138:~/ledgerium/ledgeriumkyc
 deploy:
   provider: script
   skip_cleanup: true
-  #script: sh ./deploy_script.sh $BUILDID
-  script: ssh -i ./deploy_key $USER@$SERVER_IP_ADDRESS "cd ~/ledgerium/ledgeriumkyc && bash ./deploy_script.sh $BUILDID $DOCUSENAME"
+  script: ssh -i ./deploy_key ledgerappuser@104.210.106.138 "cd ~/ledgerium/ledgeriumkyc && bash ./deploy_script.sh $BUILDID $DOCUSENAME"
   on:
     branch: master
 env:
