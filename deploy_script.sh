@@ -12,15 +12,20 @@ echo $DOCUSENAME
 echo "Move to ledgeriumkyc folder"
 cd ~/ledgerium/ledgeriumkyc
 
+echo "Remove additional backed-up yml file earlier saved"
+rm -rf docker-compose.yml_v*
+
+VERSIONSTR=`awk '/ledgeriumkyc:v/{print}' docker-compose.yml`
+VERSIONSTR=`echo "${VERSIONSTR}" | cut -d : -f3`
+echo $VERSIONSTR
+VERSIONSTR=${VERSIONSTR::-1}
+echo $VERSIONSTR
+
 echo "Taking backup of the compose file" 
-cp docker-compose.yml docker-compose.yml_$BUILDID 
+cp docker-compose.yml docker-compose.yml_v$VERSIONSTR 
 
 echo "Pull the container down in case it is running" 
 docker-compose down 
-
-VERSIONSTR=`awk '/ledgeriumkyc:v/{print}' docker-compose.yml`
-VERSIONSTR=${VERSIONSTR:33:12}
-echo $VERSIONSTR
 
 echo "String replace"
 sed -i "s/$VERSIONSTR/v$BUILDID/g" docker-compose.yml
@@ -33,8 +38,5 @@ docker-compose up -d
 
 echo "Checking if containers are up and running" 
 docker ps -a
-
-#echo "replace docker image tag and restart the container"
-#sed -i /"s//ledgeriumkyc:v1.0//ledgeriumkyc:v${BUILDID}//g/" docker-compose.yml && docker-compose up -d
 
 echo "script is finished"
