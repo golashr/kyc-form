@@ -15,10 +15,10 @@ cd ~/ledgerium/ledgeriumkyc
 echo "Remove additional backed-up yml file earlier saved"
 rm -rf docker-compose.yml_v*
 
-OLDVERSIONSTR=`awk '/ledgeriumkyc:v/{print}' docker-compose.yml`
-OLDVERSIONSTR=`echo "${VERSIONSTR}" | cut -d : -f3`
-echo $OLDVERSIONSTR
-VERSIONSTR=${OLDVERSIONSTR:0:-1}
+VERSIONSTR=`awk '/ledgeriumkyc:v/{print}' docker-compose.yml`
+VERSIONSTR=`echo "${VERSIONSTR}" | cut -d : -f3`
+echo $VERSIONSTR
+VERSIONSTR=${VERSIONSTR%?}
 echo $VERSIONSTR
 
 echo "Taking backup of the compose file" 
