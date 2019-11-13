@@ -18,7 +18,7 @@ rm -rf docker-compose.yml_v*
 OLDVERSIONSTR=`awk '/ledgeriumkyc:v/{print}' docker-compose.yml`
 OLDVERSIONSTR=`echo "${VERSIONSTR}" | cut -d : -f3`
 echo $OLDVERSIONSTR
-VERSIONSTR=${OLDVERSIONSTR::-1}
+VERSIONSTR=${OLDVERSIONSTR:0:-1}
 echo $VERSIONSTR
 
 echo "Taking backup of the compose file" 
