@@ -8,7 +8,7 @@ env:
 services:
 - docker
 addons:
-  ssh_known_hosts: $SERVER_IP_ADDRESS
+  ssh_known_hosts: 104.210.106.138
 before_install:
 - npm install
 - echo "Testing Docker Hub credentials"
